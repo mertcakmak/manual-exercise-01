@@ -10,8 +10,8 @@ const Stepper = (): JSX.Element => {
     <div>
       <h1>Stepper</h1>
       <StepperBasic />
-      <StepperHairLoss />
-      <StepperContact />
+      {/* <StepperHairLoss />
+      <StepperContact /> */}
       <StepperSummary />
     </div>
   );

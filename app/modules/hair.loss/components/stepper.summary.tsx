@@ -1,12 +1,14 @@
 "use client";
 import { JSX } from "react";
-import useHairLossHook from "../hooks/useHairLoss.hook";
+import { useHairLoss } from "../providers/hair.loss.provider";
 
 const StepperSummary = (): JSX.Element => {
-  const { hairLossStage } = useHairLossHook();
+  const { hairLossStage, age, sexAtBirth } = useHairLoss();
   return (
     <div className="p-3 m-3 border bg-gray-50">
-      <div>{hairLossStage as string}</div>
+      <div>Age: {age}</div>
+      <div>Sex at birth: {sexAtBirth}</div>
+      <div>Hair Loss Stage: {hairLossStage}</div>
     </div>
   );
 };
