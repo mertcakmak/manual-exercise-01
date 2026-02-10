@@ -26,6 +26,9 @@ interface IHairLossContext {
   consent: boolean;
   setConsent: (v: boolean) => void;
   isContactStepDone: () => boolean;
+  isValidEmail: () => boolean;
+  isSubmitted: boolean;
+  setIsSubmitted: (v: boolean) => void;
 }
 
 const HairLossContext = createContext({} as IHairLossContext);
@@ -43,8 +46,11 @@ const HairLossProvider = ({ children }: { children: React.ReactNode }) => {
   const [email, setEmail] = useState<string>("");
   const [age, setAge] = useState<number | "">(defaultAge);
   const [consent, setConsent] = useState<boolean>(false);
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const minAge = 18;
   const maxAge = 100;
+
+  const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const isValidAge = (): boolean => {
     const ageValue = Number(age);
@@ -61,6 +67,10 @@ const HairLossProvider = ({ children }: { children: React.ReactNode }) => {
 
   const isContactStepDone = (): boolean => {
     return !!email && email.length > 3 && email.includes("@") && !!consent;
+  };
+
+  const isValidEmail = (): boolean => {
+    return EMAIL_REGEX.test(email);
   };
 
   return (
@@ -86,6 +96,9 @@ const HairLossProvider = ({ children }: { children: React.ReactNode }) => {
         consent,
         setConsent,
         isContactStepDone,
+        isValidEmail,
+        isSubmitted,
+        setIsSubmitted,
       }}
     >
       {children}

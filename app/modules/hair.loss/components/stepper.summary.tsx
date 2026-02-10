@@ -10,7 +10,14 @@ const StepperSummary = (): JSX.Element => {
     stageDuration,
     email,
     setCurrentStep,
+    isSubmitted,
+    setIsSubmitted,
   } = useHairLoss();
+
+  if (isSubmitted) {
+    return <div className="flex p-2 m-2">Submitted</div>;
+  }
+
   return (
     <div>
       <div className="p-3 m-3 border bg-gray-50">
@@ -35,7 +42,12 @@ const StepperSummary = (): JSX.Element => {
           Edit
         </button>
 
-        <button className="m-2 bg-gray-950 text-white p-2">Submit</button>
+        <button
+          onClick={() => setIsSubmitted(true)}
+          className="m-2 bg-gray-950 text-white p-2"
+        >
+          Submit
+        </button>
       </div>
     </div>
   );

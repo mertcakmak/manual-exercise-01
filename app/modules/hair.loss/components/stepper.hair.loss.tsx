@@ -69,14 +69,13 @@ const StepperHairLoss = (): JSX.Element => {
           Prev
         </button>
 
-        {isHairLossStepDone() && (
-          <button
-            onClick={() => setCurrentStep("contact")}
-            className="m-2 bg-gray-950 text-white p-2"
-          >
-            Next
-          </button>
-        )}
+        <button
+          onClick={() => setCurrentStep("contact")}
+          className="m-2 bg-gray-950 text-white p-2 disabled:bg-gray-300"
+          disabled={!isHairLossStepDone()}
+        >
+          Next
+        </button>
       </div>
     </div>
   );

@@ -10,6 +10,7 @@ const StepperContact = (): JSX.Element => {
     consent,
     setConsent,
     isContactStepDone,
+    isValidEmail,
   } = useHairLoss();
   return (
     <div>
@@ -17,9 +18,11 @@ const StepperContact = (): JSX.Element => {
         <label>Email</label>
         <input
           type="email"
+          className="border p-2 rounded-md"
           value={email}
           onChange={(e) => setEmail(e.target.value.trim())}
         />
+        {email && !isValidEmail() && <div>Please type a valid email </div>}
       </div>
 
       <div>
@@ -43,14 +46,13 @@ const StepperContact = (): JSX.Element => {
           Prev
         </button>
 
-        {isContactStepDone() && (
-          <button
-            onClick={() => setCurrentStep("summary")}
-            className="m-2 bg-gray-950 text-white p-2"
-          >
-            Next
-          </button>
-        )}
+        <button
+          onClick={() => setCurrentStep("summary")}
+          className="m-2 bg-gray-950 text-white p-2 disabled:bg-gray-300"
+          disabled={!isContactStepDone()}
+        >
+          Next
+        </button>
       </div>
     </div>
   );

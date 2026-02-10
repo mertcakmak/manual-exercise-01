@@ -19,10 +19,11 @@ const StepperBasic = (): JSX.Element => {
   return (
     <div>
       <div className="flex flex-col p-2 m-2">
-        <label>Age</label>
+        <label htmlFor="age">Age</label>
         <input
           className="border p-2"
           type="number"
+          id="age"
           min={minAge}
           max={maxAge}
           value={age}
@@ -38,7 +39,7 @@ const StepperBasic = (): JSX.Element => {
         )}
       </div>
       <div className="flex flex-col p-2 m-2">
-        <label>Sex at Birth</label>
+        <div>Sex at Birth</div>
         {SEX_AT_BIRTH.map((item) => {
           return (
             <div key={item.value} className="gap-2 flex">
@@ -58,14 +59,13 @@ const StepperBasic = (): JSX.Element => {
         })}
       </div>
       <div>
-        {isBasicStepDone() && (
-          <button
-            onClick={() => setCurrentStep("hairLoss")}
-            className="m-2 bg-gray-950 text-white p-2"
-          >
-            Next
-          </button>
-        )}
+        <button
+          onClick={() => setCurrentStep("hairLoss")}
+          className="m-2 bg-gray-950 text-white p-2 disabled:bg-gray-300"
+          disabled={!isBasicStepDone()}
+        >
+          Next
+        </button>
       </div>
     </div>
   );
