@@ -13,6 +13,7 @@ const StepperBasic = (): JSX.Element => {
     sexAtBirth,
     setSexAtBirth,
     isBasicStepDone,
+    setCurrentStep,
   } = useHairLoss();
 
   return (
@@ -56,9 +57,16 @@ const StepperBasic = (): JSX.Element => {
           );
         })}
       </div>
-      {isBasicStepDone() && (
-        <button className="m-2 bg-gray-950 text-white p-2">Next</button>
-      )}
+      <div>
+        {isBasicStepDone() && (
+          <button
+            onClick={() => setCurrentStep("hairLoss")}
+            className="m-2 bg-gray-950 text-white p-2"
+          >
+            Next
+          </button>
+        )}
+      </div>
     </div>
   );
 };

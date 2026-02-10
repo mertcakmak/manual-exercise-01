@@ -1,24 +1,34 @@
 "use client";
 import { JSX } from "react";
-import { HAIR_LOSS_OPTIONS, THairLoss } from "../types";
+import {
+  HAIR_LOSS_OPTIONS,
+  STAGE_DURATION,
+  THairLoss,
+  TStageDuration,
+} from "../types";
 import { useHairLoss } from "../providers/hair.loss.provider";
 
 const StepperHairLoss = (): JSX.Element => {
-  const { hairLossStage, setHairLossStage } = useHairLoss();
-
-  const onSelectHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value as THairLoss | "";
-    setHairLossStage(value === "" ? null : value);
-  };
+  const {
+    hairLossStage,
+    setHairLossStage,
+    setCurrentStep,
+    stageDuration,
+    setStageDuration,
+    isHairLossStepDone,
+  } = useHairLoss();
 
   return (
     <div>
       <div className="flex flex-col p-2 m-2">
         <label>Hair loss stage</label>
         <select
-          value={hairLossStage as string}
+          value={hairLossStage ?? ""}
           className="border p-2 rounded-md"
-          onChange={onSelectHandler}
+          onChange={(e) => {
+            const value = e.target.value as THairLoss | "";
+            setHairLossStage(value === "" ? null : value);
+          }}
         >
           <option value={""}>Please select a stage</option>
           {HAIR_LOSS_OPTIONS.map((item) => {
@@ -31,7 +41,42 @@ const StepperHairLoss = (): JSX.Element => {
         </select>
       </div>
       <div className="flex flex-col p-2 m-2">
-        <label>Hair loss stage</label>
+        <label>Duration</label>
+        <select
+          value={stageDuration ?? ""}
+          className="border p-2 rounded-md"
+          onChange={(e) => {
+            const value = e.target.value as TStageDuration | "";
+            setStageDuration(value === "" ? null : value);
+          }}
+        >
+          <option value={""}>Please select a duration</option>
+          {STAGE_DURATION.map((item) => {
+            return (
+              <option key={item.value} value={item.value}>
+                {item.label}
+              </option>
+            );
+          })}
+        </select>
+      </div>
+
+      <div className="flex gap-2">
+        <button
+          onClick={() => setCurrentStep("basic")}
+          className="m-2 bg-gray-950 text-white p-2"
+        >
+          Prev
+        </button>
+
+        {isHairLossStepDone() && (
+          <button
+            onClick={() => setCurrentStep("contact")}
+            className="m-2 bg-gray-950 text-white p-2"
+          >
+            Next
+          </button>
+        )}
       </div>
     </div>
   );

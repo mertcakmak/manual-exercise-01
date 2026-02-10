@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import HairLossProvider from "./modules/hair.loss/providers/hair.loss.provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,13 +24,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <HairLossProvider>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          {children}
-        </body>
-      </HairLossProvider>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        {children}
+      </body>
     </html>
   );
 }
