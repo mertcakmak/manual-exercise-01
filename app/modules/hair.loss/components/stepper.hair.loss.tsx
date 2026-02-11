@@ -1,5 +1,5 @@
 "use client";
-import { JSX } from "react";
+import { JSX, useState } from "react";
 import {
   HAIR_LOSS_OPTIONS,
   STAGE_DURATION,
@@ -9,6 +9,8 @@ import {
 import { useHairLoss } from "../providers/hair.loss.provider";
 
 const StepperHairLoss = (): JSX.Element => {
+  const [showForm, setShowForm] = useState<boolean>(false);
+
   const {
     hairLossStage,
     setHairLossStage,
@@ -16,9 +18,39 @@ const StepperHairLoss = (): JSX.Element => {
     stageDuration,
     setStageDuration,
     isHairLossStepDone,
-    skipHairLoss,
     setSkipHairLoss,
+    didAskSkipHairloss,
+    setDidAskSkipLoss,
   } = useHairLoss();
+
+  if (!showForm && !didAskSkipHairloss) {
+    return (
+      <div className="p-4 m-4">
+        <p>Did you face any hair loss problem?</p>
+        <div className="flex gap-2">
+          <button
+            onClick={() => {
+              setDidAskSkipLoss(true);
+              setShowForm(true);
+            }}
+            className="m-2 bg-gray-950 text-white p-2"
+          >
+            Yes
+          </button>
+          <button
+            onClick={() => {
+              setSkipHairLoss(true);
+              setDidAskSkipLoss(true);
+              setCurrentStep("contact");
+            }}
+            className="m-2 bg-gray-950 text-white p-2"
+          >
+            No
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -70,18 +102,6 @@ const StepperHairLoss = (): JSX.Element => {
         >
           Prev
         </button>
-
-        {!skipHairLoss && (
-          <button
-            onClick={() => {
-              setSkipHairLoss(true);
-              setCurrentStep("contact");
-            }}
-            className="m-2 bg-red-600 text-white p-2"
-          >
-            Skip
-          </button>
-        )}
 
         <button
           onClick={() => setCurrentStep("contact")}

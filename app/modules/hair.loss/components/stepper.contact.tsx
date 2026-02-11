@@ -11,7 +11,9 @@ const StepperContact = (): JSX.Element => {
     setConsent,
     isContactStepDone,
     isValidEmail,
+    skipHairLoss,
   } = useHairLoss();
+
   return (
     <div>
       <div>
@@ -40,7 +42,7 @@ const StepperContact = (): JSX.Element => {
 
       <div className="flex gap-2">
         <button
-          onClick={() => setCurrentStep("hairLoss")}
+          onClick={() => setCurrentStep(skipHairLoss ? "basic" : "hairLoss")}
           className="m-2 bg-gray-950 text-white p-2"
         >
           Prev

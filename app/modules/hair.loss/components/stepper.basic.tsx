@@ -14,6 +14,7 @@ const StepperBasic = (): JSX.Element => {
     setSexAtBirth,
     isBasicStepDone,
     setCurrentStep,
+    skipHairLoss,
   } = useHairLoss();
 
   return (
@@ -60,7 +61,7 @@ const StepperBasic = (): JSX.Element => {
       </div>
       <div>
         <button
-          onClick={() => setCurrentStep("hairLoss")}
+          onClick={() => setCurrentStep(skipHairLoss ? "contact" : "hairLoss")}
           className="m-2 bg-gray-950 text-white p-2 disabled:bg-gray-300"
           disabled={!isBasicStepDone()}
         >
