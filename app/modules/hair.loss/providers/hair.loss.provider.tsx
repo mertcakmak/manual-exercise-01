@@ -29,6 +29,8 @@ interface IHairLossContext {
   isValidEmail: () => boolean;
   isSubmitted: boolean;
   setIsSubmitted: (v: boolean) => void;
+  skipHairLoss: boolean;
+  setSkipHairLoss: (v: boolean) => void;
 }
 
 const HairLossContext = createContext({} as IHairLossContext);
@@ -42,6 +44,7 @@ const HairLossProvider = ({ children }: { children: React.ReactNode }) => {
   const [stageDuration, setStageDuration] = useState<TStageDuration | null>(
     null,
   );
+  const [skipHairLoss, setSkipHairLoss] = useState<boolean>(false);
   const [sexAtBirth, setSexAtBirth] = useState<TSexAtBirth | null>(null);
   const [email, setEmail] = useState<string>("");
   const [age, setAge] = useState<number | "">(defaultAge);
@@ -62,7 +65,7 @@ const HairLossProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const isHairLossStepDone = () => {
-    return hairLossStage !== null && stageDuration !== null;
+    return hairLossStage !== null && stageDuration !== null && skipHairLoss;
   };
 
   const isContactStepDone = (): boolean => {
@@ -99,6 +102,8 @@ const HairLossProvider = ({ children }: { children: React.ReactNode }) => {
         isValidEmail,
         isSubmitted,
         setIsSubmitted,
+        skipHairLoss,
+        setSkipHairLoss,
       }}
     >
       {children}

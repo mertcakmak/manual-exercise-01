@@ -16,6 +16,8 @@ const StepperHairLoss = (): JSX.Element => {
     stageDuration,
     setStageDuration,
     isHairLossStepDone,
+    skipHairLoss,
+    setSkipHairLoss,
   } = useHairLoss();
 
   return (
@@ -68,6 +70,18 @@ const StepperHairLoss = (): JSX.Element => {
         >
           Prev
         </button>
+
+        {!skipHairLoss && (
+          <button
+            onClick={() => {
+              setSkipHairLoss(true);
+              setCurrentStep("contact");
+            }}
+            className="m-2 bg-red-600 text-white p-2"
+          >
+            Skip
+          </button>
+        )}
 
         <button
           onClick={() => setCurrentStep("contact")}
