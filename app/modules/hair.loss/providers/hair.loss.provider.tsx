@@ -76,7 +76,7 @@ const HairLossProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const isContactStepDone = (): boolean => {
-    return !!email && email.length > 3 && email.includes("@") && !!consent;
+    return isValidEmail() && consent;
   };
 
   const isValidEmail = (): boolean => {
