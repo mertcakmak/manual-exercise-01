@@ -1,6 +1,7 @@
 "use client";
-import { JSX } from "react";
+import { JSX, useEffect } from "react";
 import { useHairLoss } from "../providers/hair.loss.provider";
+import { trackEvent } from "../util";
 
 const StepperContact = (): JSX.Element => {
   const {
@@ -13,6 +14,10 @@ const StepperContact = (): JSX.Element => {
     isValidEmail,
     skipHairLoss,
   } = useHairLoss();
+
+  useEffect(() => {
+    trackEvent("stepView", { step: "contact" });
+  }, []);
 
   return (
     <div>

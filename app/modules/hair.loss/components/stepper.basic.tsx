@@ -1,7 +1,8 @@
 "use client";
-import { JSX } from "react";
+import { JSX, useEffect } from "react";
 import { useHairLoss } from "../providers/hair.loss.provider";
 import { SEX_AT_BIRTH } from "../types";
+import { trackEvent } from "../util";
 
 const StepperBasic = (): JSX.Element => {
   const {
@@ -16,6 +17,10 @@ const StepperBasic = (): JSX.Element => {
     setCurrentStep,
     skipHairLoss,
   } = useHairLoss();
+
+  useEffect(() => {
+    trackEvent("stepView", { step: "basic" });
+  }, []);
 
   return (
     <div>

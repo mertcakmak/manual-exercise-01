@@ -22,3 +22,5 @@ export const STAGE_DURATION = [
 export type TStageDuration = (typeof STAGE_DURATION)[number]["value"];
 
 export type TStep = "basic" | "hairLoss" | "contact" | "summary";
+
+export type TEventAction = "stepView" | "stepCompleted" | "stepSubmitted";

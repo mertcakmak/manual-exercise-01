@@ -1,6 +1,7 @@
 "use client";
-import { JSX } from "react";
+import { JSX, useEffect } from "react";
 import { useHairLoss } from "../providers/hair.loss.provider";
+import { trackEvent } from "../util";
 
 const StepperSummary = (): JSX.Element => {
   const {
@@ -13,6 +14,10 @@ const StepperSummary = (): JSX.Element => {
     isSubmitted,
     setIsSubmitted,
   } = useHairLoss();
+
+  useEffect(() => {
+    trackEvent("stepView", { step: "summary" });
+  }, []);
 
   if (isSubmitted) {
     return <div className="flex p-2 m-2">Submitted</div>;

@@ -1,5 +1,5 @@
 "use client";
-import { JSX, useState } from "react";
+import { JSX, useEffect, useState } from "react";
 import {
   HAIR_LOSS_OPTIONS,
   STAGE_DURATION,
@@ -7,6 +7,7 @@ import {
   TStageDuration,
 } from "../types";
 import { useHairLoss } from "../providers/hair.loss.provider";
+import { trackEvent } from "../util";
 
 const StepperHairLoss = (): JSX.Element => {
   const [showForm, setShowForm] = useState<boolean>(false);
@@ -22,6 +23,10 @@ const StepperHairLoss = (): JSX.Element => {
     didAskSkipHairloss,
     setDidAskSkipLoss,
   } = useHairLoss();
+
+  useEffect(() => {
+    trackEvent("stepView", { step: "hairLoss" });
+  }, []);
 
   if (!showForm && !didAskSkipHairloss) {
     return (

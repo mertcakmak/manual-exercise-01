@@ -5,6 +5,8 @@ import { THairLoss, TSexAtBirth, TStageDuration, TStep } from "../types";
 
 const defaultAge = 18;
 
+const FEATURES = { SKIP_HAIR_STEP: true };
+
 interface IHairLossContext {
   hairLossStage: THairLoss | null;
   setHairLossStage: (v: THairLoss | null) => void;
@@ -46,7 +48,9 @@ const HairLossProvider = ({ children }: { children: React.ReactNode }) => {
   const [stageDuration, setStageDuration] = useState<TStageDuration | null>(
     null,
   );
-  const [skipHairLoss, setSkipHairLoss] = useState<boolean>(false);
+  const [skipHairLoss, setSkipHairLoss] = useState<boolean>(
+    FEATURES.SKIP_HAIR_STEP,
+  );
   const [sexAtBirth, setSexAtBirth] = useState<TSexAtBirth | null>(null);
   const [email, setEmail] = useState<string>("");
   const [age, setAge] = useState<number | "">(defaultAge);
